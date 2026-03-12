@@ -3,52 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGITAL HUB | Professional IT Solutions</title>
+    <title>Ahmad | Professional IT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS SAMA SEPERTI SEBELUMNYA */
-        :root { --primary: #0f172a; --accent: #3b82f6; --accent-hover: #2563eb; --bg-color: #f8fafc; --card-bg: #ffffff; --text-main: #1e293b; --text-muted: #64748b; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
-        nav { background-color: var(--primary); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
-        .logo span { color: var(--accent); }
-        .nav-links a { color: #cbd5e1; text-decoration: none; margin-left: 2rem; font-weight: 600; transition: color 0.3s; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%); color: white; text-align: center; padding: 6rem 20px; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem auto; }
-        .btn-primary { background-color: var(--accent); color: white; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
-        .section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1px)); gap: 2rem; }
-        .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.3s ease; }
-        .card:hover { transform: translateY(-8px); }
-        .card-img { height: 200px; background-color: #e2e8f0; width: 100%; object-fit: cover; }
-        .card-content { padding: 1.5rem; }
-        .tag { background-color: #e0f2fe; color: #0369a1; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; text-transform: uppercase; }
-        .card h3 { font-size: 1.25rem; margin: 0.8rem 0; color: var(--primary); }
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; min-height: 70px; }
-        .btn-wa { display: block; text-align: center; background-color: #25D366; color: white; text-decoration: none; padding: 0.7rem; border-radius: 6px; font-weight: 600; }
-        footer { background-color: var(--primary); color: #cbd5e1; text-align: center; padding: 2rem; border-top: 1px solid #334155; }
-        .loading { text-align: center; width: 100%; color: var(--accent); font-weight: bold; padding: 20px; }
+        :root {
+            --primary: #0f172a; 
+            --accent: #3b82f6; 
+            --accent-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* --- NEW PROFESSIONAL HERO BANNER --- */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 4rem 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .text-group {
+            flex: 1;
+        }
+
+        .banner-tag {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-banner p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-banner .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .hero-banner .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .image-group {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-group img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Responsif untuk Mobile */
+        @media (max-width: 768px) {
+            .hero-banner {
+                padding: 4rem 20px;
+            }
+            .banner-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-banner h1 {
+                font-size: 2.2rem;
+            }
+            .image-group img {
+                max-width: 90%;
+            }
+            .nav-links {
+                display: none; /* Sederhanakan nav di mobile sementara */
+            }
+        }
+
+        /* Section Global */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        /* Grid Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1px));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tag {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            line-height: 1.4;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn-wa {
+            display: block;
+            text-align: center;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+
+        .btn-wa:hover {
+            background-color: #16a34a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #334155;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            width: 100%;
+            color: var(--accent);
+            font-weight: bold;
+            padding: 40px 20px;
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">DIGITAL<span>.HUB</span></div>
+        <div class="logo">Ahmad<span>.IT</span></div>
         <div class="nav-links">
             <a href="#aplikasi">Software</a>
             <a href="#jasa">Layanan Jasa</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Solusi Digital & Automasi Cerdas</h1>
-        <p>Menyediakan perangkat lunak siap pakai dan layanan pengembangan sistem untuk mengoptimalkan efisiensi dan skala bisnis Anda.</p>
-        <a href="#aplikasi" class="btn-primary">Lihat Katalog Produk</a>
+    <header class="hero-banner">
+        <div class="banner-content">
+            <div class="text-group">
+                <span class="banner-tag">Solusi Digital Terpadu</span>
+                <h1>Wujudkan Ide Anda Bersama Ahmad.IT</h1>
+                <p>Kami hadir untuk membangun kehadiran digital yang kuat untuk bisnis Anda. Mulai dari pembuatan Aplikasi Web & Android/iOS, Undangan Digital Premium, hingga strategi Peningkatan Social Media.</p>
+                <a href="#jasa" class="btn-primary">Lihat Layanan Jasa</a>
+            </div>
+            <div class="image-group">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Layanan Jasa IT dan Digital Marketing">
+            </div>
+        </div>
     </header>
 
     <section id="aplikasi" class="section">
@@ -57,7 +324,7 @@
             <p>Sistem dan bot automasi yang dirancang untuk performa tinggi.</p>
         </div>
         <div class="grid" id="grid-aplikasi">
-            <div class="loading">Memuat data dari database...</div>
+            <div class="loading">Memuat katalog aplikasi...</div>
         </div>
     </section>
 
@@ -67,7 +334,7 @@
             <p>Pengembangan teknologi dan digital marketing untuk bisnis Anda.</p>
         </div>
         <div class="grid" id="grid-jasa">
-            <div class="loading">Memuat data dari database...</div>
+            <div class="loading">Memuat layanan jasa...</div>
         </div>
     </section>
 
@@ -79,6 +346,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
+        // Konfigurasi Firebase milikmu
         const firebaseConfig = {
           apiKey: "AIzaSyB3wsOf_zvI5NEelk1-tgwffxyQMbXFY8o",
           authDomain: "katalog-website-saya.firebaseapp.com",
@@ -92,38 +360,43 @@
         const db = getFirestore(app);
 
         async function renderData() {
-            const querySnapshot = await getDocs(collection(db, "katalog_item"));
-            
-            let htmlAplikasi = "";
-            let htmlJasa = "";
-            let nomorWA = "6285183010853"; // Nomor WA Kamu
-
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const textWA = encodeURIComponent(data.waText);
+            try {
+                const querySnapshot = await getDocs(collection(db, "katalog_item"));
                 
-                const cardHTML = `
-                    <div class="card">
-                        <img src="${data.gambar}" alt="${data.judul}" class="card-img">
-                        <div class="card-content">
-                            <span class="tag">${data.kategori.toUpperCase()}</span>
-                            <h3>${data.judul}</h3>
-                            <p>${data.deskripsi}</p>
-                            <a href="https://wa.me/${nomorWA}?text=${textWA}" class="btn-wa" target="_blank">Order via WhatsApp</a>
+                let htmlAplikasi = "";
+                let htmlJasa = "";
+                const nomorWA = "6285183010853";
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const textWA = encodeURIComponent(data.waText);
+                    
+                    const cardHTML = `
+                        <div class="card">
+                            <img src="${data.gambar}" alt="${data.judul}" class="card-img" onerror="this.src='https://via.placeholder.com/400x200?text=Gambar+Tidak+Ditemukan'">
+                            <div class="card-content">
+                                <span class="tag">${data.kategori.toUpperCase()}</span>
+                                <h3>${data.judul}</h3>
+                                <p>${data.deskripsi}</p>
+                                <a href="https://wa.me/${nomorWA}?text=${textWA}" class="btn-wa" target="_blank">Order via WhatsApp</a>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
 
-                if (data.kategori === 'aplikasi') {
-                    htmlAplikasi += cardHTML;
-                } else if (data.kategori === 'jasa') {
-                    htmlJasa += cardHTML;
-                }
-            });
+                    if (data.kategori === 'aplikasi') {
+                        htmlAplikasi += cardHTML;
+                    } else if (data.kategori === 'jasa') {
+                        htmlJasa += cardHTML;
+                    }
+                });
 
-            // Update DOM
-            document.getElementById('grid-aplikasi').innerHTML = htmlAplikasi || "<p style='text-align:center;'>Belum ada aplikasi.</p>";
-            document.getElementById('grid-jasa').innerHTML = htmlJasa || "<p style='text-align:center;'>Belum ada layanan jasa.</p>";
+                document.getElementById('grid-aplikasi').innerHTML = htmlAplikasi || "<p style='text-align:center; grid-column: 1/-1;'>Belum ada aplikasi yang ditambahkan.</p>";
+                document.getElementById('grid-jasa').innerHTML = htmlJasa || "<p style='text-align:center; grid-column: 1/-1;'>Belum ada layanan jasa yang ditambahkan.</p>";
+            } catch (error) {
+                console.error("Gagal memuat data:", error);
+                document.getElementById('grid-aplikasi').innerHTML = "<p style='text-align:center; color: red; grid-column: 1/-1;'>Gagal terhubung ke database.</p>";
+                document.getElementById('grid-jasa').innerHTML = "<p style='text-align:center; color: red; grid-column: 1/-1;'>Gagal terhubung ke database.</p>";
+            }
         }
 
         renderData();
