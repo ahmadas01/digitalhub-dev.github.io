@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL HUB | Professional IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS SAMA SEPERTI SEBELUMNYA */
+        :root { --primary: #0f172a; --accent: #3b82f6; --accent-hover: #2563eb; --bg-color: #f8fafc; --card-bg: #ffffff; --text-main: #1e293b; --text-muted: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        nav { background-color: var(--primary); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+        .nav-links a { color: #cbd5e1; text-decoration: none; margin-left: 2rem; font-weight: 600; transition: color 0.3s; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%); color: white; text-align: center; padding: 6rem 20px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem auto; }
+        .btn-primary { background-color: var(--accent); color: white; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1px)); gap: 2rem; }
+        .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-8px); }
+        .card-img { height: 200px; background-color: #e2e8f0; width: 100%; object-fit: cover; }
+        .card-content { padding: 1.5rem; }
+        .tag { background-color: #e0f2fe; color: #0369a1; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; text-transform: uppercase; }
+        .card h3 { font-size: 1.25rem; margin: 0.8rem 0; color: var(--primary); }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; min-height: 70px; }
+        .btn-wa { display: block; text-align: center; background-color: #25D366; color: white; text-decoration: none; padding: 0.7rem; border-radius: 6px; font-weight: 600; }
+        footer { background-color: var(--primary); color: #cbd5e1; text-align: center; padding: 2rem; border-top: 1px solid #334155; }
+        .loading { text-align: center; width: 100%; color: var(--accent); font-weight: bold; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DIGITAL<span>.HUB</span></div>
+        <div class="nav-links">
+            <a href="#aplikasi">Software</a>
+            <a href="#jasa">Layanan Jasa</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Solusi Digital & Automasi Cerdas</h1>
+        <p>Menyediakan perangkat lunak siap pakai dan layanan pengembangan sistem untuk mengoptimalkan efisiensi dan skala bisnis Anda.</p>
+        <a href="#aplikasi" class="btn-primary">Lihat Katalog Produk</a>
+    </header>
+
+    <section id="aplikasi" class="section">
+        <div class="section-header">
+            <h2>Aplikasi Siap Pakai</h2>
+            <p>Sistem dan bot automasi yang dirancang untuk performa tinggi.</p>
+        </div>
+        <div class="grid" id="grid-aplikasi">
+            <div class="loading">Memuat data dari database...</div>
+        </div>
+    </section>
+
+    <section id="jasa" class="section" style="background-color: white;">
+        <div class="section-header">
+            <h2>Layanan Jasa Profesional</h2>
+            <p>Pengembangan teknologi dan digital marketing untuk bisnis Anda.</p>
+        </div>
+        <div class="grid" id="grid-jasa">
+            <div class="loading">Memuat data dari database...</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ahmad IT Solutions. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyB3wsOf_zvI5NEelk1-tgwffxyQMbXFY8o",
+          authDomain: "katalog-website-saya.firebaseapp.com",
+          projectId: "katalog-website-saya",
+          storageBucket: "katalog-website-saya.firebasestorage.app",
+          messagingSenderId: "45405465689",
+          appId: "1:45405465689:web:ca130f8676a58a2b78d548"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function renderData() {
+            const querySnapshot = await getDocs(collection(db, "katalog_item"));
+            
+            let htmlAplikasi = "";
+            let htmlJasa = "";
+            let nomorWA = "6285183010853"; // Nomor WA Kamu
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const textWA = encodeURIComponent(data.waText);
+                
+                const cardHTML = `
+                    <div class="card">
+                        <img src="${data.gambar}" alt="${data.judul}" class="card-img">
+                        <div class="card-content">
+                            <span class="tag">${data.kategori.toUpperCase()}</span>
+                            <h3>${data.judul}</h3>
+                            <p>${data.deskripsi}</p>
+                            <a href="https://wa.me/${nomorWA}?text=${textWA}" class="btn-wa" target="_blank">Order via WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+
+                if (data.kategori === 'aplikasi') {
+                    htmlAplikasi += cardHTML;
+                } else if (data.kategori === 'jasa') {
+                    htmlJasa += cardHTML;
+                }
+            });
+
+            // Update DOM
+            document.getElementById('grid-aplikasi').innerHTML = htmlAplikasi || "<p style='text-align:center;'>Belum ada aplikasi.</p>";
+            document.getElementById('grid-jasa').innerHTML = htmlJasa || "<p style='text-align:center;'>Belum ada layanan jasa.</p>";
+        }
+
+        renderData();
+    </script>
+</body>
+</html>

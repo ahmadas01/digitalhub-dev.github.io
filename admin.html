@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Admin | Katalog</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; margin: 0; padding: 20px; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 100%; max-width: 800px; }
+        
+        /* Form Login */
+        #login-section { max-width: 400px; margin: auto; text-align: center; }
+        #login-section h2 { color: #0f172a; margin-bottom: 20px; border: none; }
+        
+        /* Dashboard */
+        #dashboard-section { display: none; } /* Disembunyikan secara default */
+        
+        .header-dash { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px; }
+        .header-dash h2 { margin: 0; color: #0f172a; border: none; padding: 0; }
+        
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #1e293b; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        
+        button { background: #3b82f6; color: white; border: none; padding: 12px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #2563eb; }
+        
+        .btn-logout { background: #ef4444; width: auto; padding: 8px 15px; font-size: 14px; }
+        .btn-logout:hover { background: #dc2626; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
+        th { background: #1e293b; color: white; }
+        .btn-hapus { background: #ef4444; padding: 6px 12px; border-radius: 4px; color: white; cursor: pointer; border: none; width: auto; font-size: 12px; }
+        
+        .error-msg { color: #ef4444; margin-bottom: 15px; font-size: 14px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="login-section">
+        <h2>Admin Area</h2>
+        <div id="error-message" class="error-msg">Email atau password salah!</div>
+        <form id="formLogin">
+            <div class="form-group">
+                <label>Email Admin</label>
+                <input type="email" id="loginEmail" placeholder="Masukkan email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Masukkan password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="container" id="dashboard-section">
+        <div class="header-dash">
+            <h2>Dashboard Input</h2>
+            <button id="btnLogout" class="btn-logout">Logout</button>
+        </div>
+        
+        <form id="formTambah">
+            <div class="form-group">
+                <label>Kategori</label>
+                <select id="kategori" required>
+                    <option value="aplikasi">Aplikasi Siap Pakai</option>
+                    <option value="jasa">Layanan Jasa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nama Produk / Jasa</label>
+                <input type="text" id="judul" placeholder="Contoh: Aplikasi Absensi Mobile" required>
+            </div>
+            <div class="form-group">
+                <label>Link Gambar (URL)</label>
+                <input type="text" id="gambar" placeholder="https://..." required>
+            </div>
+            <div class="form-group">
+                <label>Deskripsi Singkat</label>
+                <textarea id="deskripsi" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Teks Tombol WhatsApp</label>
+                <input type="text" id="waText" placeholder="Halo Ahmad, saya mau order..." required>
+            </div>
+            <button type="submit">Simpan Data Aman</button>
+        </form>
+
+        <h3 style="margin-top: 40px; color: #0f172a;">Daftar Item Aktif</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Judul</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelItem">
+                </tbody>
+        </table>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3wsOf_zvI5NEelk1-tgwffxyQMbXFY8o",
+            authDomain: "katalog-website-saya.firebaseapp.com",
+            projectId: "katalog-website-saya",
+            storageBucket: "katalog-website-saya.firebasestorage.app",
+            messagingSenderId: "45405465689",
+            appId: "1:45405465689:web:ca130f8676a58a2b78d548"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const dbRef = collection(db, "katalog_item");
+
+        // UI Elements
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const errorMsg = document.getElementById('error-message');
+
+        // 1. Cek Status Login Otomatis
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Jika sudah login
+                loginSection.style.display = 'none';
+                dashboardSection.style.display = 'block';
+                loadData(); // Load data hanya jika sudah login
+                document.body.style.background = '#f4f7f6'; // Ubah warna background biar terang
+            } else {
+                // Jika belum login
+                loginSection.style.display = 'block';
+                dashboardSection.style.display = 'none';
+                document.body.style.background = '#0f172a'; // Background gelap untuk form login
+            }
+        });
+
+        // 2. Proses Login
+        document.getElementById('formLogin').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    errorMsg.style.display = 'none';
+                    document.getElementById('formLogin').reset();
+                })
+                .catch((error) => {
+                    errorMsg.style.display = 'block';
+                    console.error("Login gagal: ", error.message);
+                });
+        });
+
+        // 3. Proses Logout
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                // Otomatis di-handle oleh onAuthStateChanged
+            }).catch((error) => {
+                console.error("Logout gagal", error);
+            });
+        });
+
+        // 4. Tambah Data (Hanya berhasil jika rules valid)
+        document.getElementById('formTambah').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await addDoc(dbRef, {
+                    kategori: document.getElementById('kategori').value,
+                    judul: document.getElementById('judul').value,
+                    gambar: document.getElementById('gambar').value,
+                    deskripsi: document.getElementById('deskripsi').value,
+                    waText: document.getElementById('waText').value
+                });
+                alert("Berhasil disimpan ke database!");
+                document.getElementById('formTambah').reset();
+                loadData();
+            } catch (error) {
+                console.error("Error: ", error);
+                alert("Akses Ditolak! Anda tidak memiliki izin.");
+            }
+        });
+
+        // 5. Tampil Data
+        async function loadData() {
+            const tabel = document.getElementById('tabelItem');
+            tabel.innerHTML = "<tr><td colspan='3'>Memuat data...</td></tr>";
+            
+            try {
+                const querySnapshot = await getDocs(dbRef);
+                tabel.innerHTML = "";
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    tabel.innerHTML += `
+                        <tr>
+                            <td>${data.kategori.toUpperCase()}</td>
+                            <td>${data.judul}</td>
+                            <td><button class="btn-hapus" onclick="hapusData('${docSnap.id}')">Hapus</button></td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                tabel.innerHTML = "<tr><td colspan='3'>Gagal memuat data.</td></tr>";
+            }
+        }
+
+        // 6. Hapus Data
+        window.hapusData = async function(id) {
+            if(confirm("Yakin ingin menghapus item ini?")) {
+                try {
+                    await deleteDoc(doc(db, "katalog_item", id));
+                    loadData();
+                } catch (error) {
+                    alert("Akses Ditolak! Gagal menghapus.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
