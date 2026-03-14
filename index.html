@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital hub | Professional IT Solutions</title>
+    <title>Ahmad | Professional IT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -57,6 +57,11 @@
             color: var(--accent);
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links a {
             color: #cbd5e1;
             text-decoration: none;
@@ -69,7 +74,24 @@
             color: white;
         }
 
-        /* --- NEW PROFESSIONAL HERO BANNER --- */
+        /* Tombol Khusus Member SaaS */
+        .nav-links .btn-member {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa !important;
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            margin-left: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links .btn-member:hover {
+            background-color: var(--accent) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Hero Banner */
         .hero-banner {
             background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
             color: white;
@@ -167,7 +189,7 @@
                 max-width: 90%;
             }
             .nav-links {
-                display: none; /* Sederhanakan nav di mobile sementara */
+                display: none; 
             }
         }
 
@@ -297,10 +319,11 @@
 <body>
 
     <nav>
-        <div class="logo">DIGITAL<span>.HUB</span></div>
+        <div class="logo">Ahmad<span>.IT</span></div>
         <div class="nav-links">
             <a href="#aplikasi">Software</a>
             <a href="#jasa">Layanan Jasa</a>
+            <a href="#" class="btn-member" onclick="alert('Panel Member WA Blast sedang dalam tahap perancangan sistem backend. Segera Hadir!')">Login WA Blast</a>
         </div>
     </nav>
 
@@ -308,7 +331,7 @@
         <div class="banner-content">
             <div class="text-group">
                 <span class="banner-tag">Solusi Digital Terpadu</span>
-                <h1>Wujudkan Ide Anda Bersama Digital hub</h1>
+                <h1>Wujudkan Ide Anda Bersama Ahmad.IT</h1>
                 <p>Kami hadir untuk membangun kehadiran digital yang kuat untuk bisnis Anda. Mulai dari pembuatan Aplikasi Web & Android/iOS, Undangan Digital Premium, hingga strategi Peningkatan Social Media.</p>
                 <a href="#jasa" class="btn-primary">Lihat Layanan Jasa</a>
             </div>
@@ -339,14 +362,14 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Digital hub Solutions. All Rights Reserved.</p>
+        <p>&copy; 2026 Ahmad IT Solutions. All Rights Reserved.</p>
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase milikmu
+        // Konfigurasi Firebase
         const firebaseConfig = {
           apiKey: "AIzaSyB3wsOf_zvI5NEelk1-tgwffxyQMbXFY8o",
           authDomain: "katalog-website-saya.firebaseapp.com",
@@ -403,5 +426,3 @@
     </script>
 </body>
 </html>
-
-
